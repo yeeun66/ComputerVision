@@ -1,0 +1,3 @@
+/Users/oyeeun/Desktop/installation/test/build/CMakeFiles/MyProject.dir
+/Users/oyeeun/Desktop/installation/test/build/CMakeFiles/edit_cache.dir
+/Users/oyeeun/Desktop/installation/test/build/CMakeFiles/rebuild_cache.dir
