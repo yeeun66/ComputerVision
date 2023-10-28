@@ -84,14 +84,15 @@ int main() {
         resize(image, image, Size(640, 480));
 
         // Adjust keypoint coordinates for drawing matches
-        for (KeyPoint &kp : keypoints1) {
-            kp.pt.x *= (640.0 / query.cols);
-            kp.pt.y *= (480.0 / query.rows);
+        for (int i = 0; i < keypoints1.size(); i++) {
+            keypoints1[i].pt.x *= (640.0 / query.cols);
+            keypoints1[i].pt.y *= (480.0 / query.rows);
         }
-        for (KeyPoint &kp : keypoints2) {
-            kp.pt.x *= (640.0 / image.cols);
-            kp.pt.y *= (480.0 / image.rows);
+        for (int i = 0; i < keypoints2.size(); i++) {
+            keypoints2[i].pt.x *= (640.0 / image.cols);
+            keypoints2[i].pt.y *= (480.0 / image.rows);
         }
+
 
         Mat imgMatches;
         drawMatches(query, keypoints1, image, keypoints2, bestMatches, imgMatches, Scalar::all(-1), Scalar(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
