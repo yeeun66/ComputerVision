@@ -55,7 +55,7 @@ int main() {
         orbF->detectAndCompute(image, noArray(), keypoints2, descriptors2);
 
         // KNN Matching (k-nearest neighbor matching)
-        vector<vector<DMatch>> matches;
+        vector<vector<DMatch> > matches;
         int k = 2;
         matcher.knnMatch(descriptors1, descriptors2, matches, k);
 
@@ -82,6 +82,17 @@ int main() {
         // Display query and best matching image
         Mat image = imread(dbImages[bestMatchIndex]);
         resize(image, image, Size(640, 480));
+
+        // Adjust keypoint coordinates for drawing matches
+        for (KeyPoint &kp : keypoints1) {
+            kp.pt.x *= (640.0 / query.cols);
+            kp.pt.y *= (480.0 / query.rows);
+        }
+        for (KeyPoint &kp : keypoints2) {
+            kp.pt.x *= (640.0 / image.cols);
+            kp.pt.y *= (480.0 / image.rows);
+        }
+
         Mat imgMatches;
         drawMatches(query, keypoints1, image, keypoints2, bestMatches, imgMatches, Scalar::all(-1), Scalar(-1), vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
         imshow("Query", query);
